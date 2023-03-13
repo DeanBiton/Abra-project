@@ -20,7 +20,7 @@ public class RandomController : ControllerBase
         try
         {
             if(!gender.Equals("male") && !gender.Equals("female"))
-                throw new Exception("Invalid gender");
+                throw new ArgumentException("Invalid gender");
 
             var user = await _randomService.GetUsersData(gender);
             return Ok(user);
@@ -41,7 +41,7 @@ public class RandomController : ControllerBase
         }
         catch(Exception ex)
         {
-            return BadRequest(new ErrorDTO(ex.Message));
+            return StatusCode(500, new ErrorDTO(ex.Message));
         }
     }
 
@@ -55,7 +55,7 @@ public class RandomController : ControllerBase
         }
         catch(Exception ex)
         {
-            return BadRequest(new ErrorDTO(ex.Message));
+            return StatusCode(500, new ErrorDTO(ex.Message));
         }
     }
 
@@ -69,7 +69,7 @@ public class RandomController : ControllerBase
         }
         catch(Exception ex)
         {
-            return BadRequest(new ErrorDTO(ex.Message));
+            return StatusCode(500, new ErrorDTO(ex.Message));
         }
     }
 }
